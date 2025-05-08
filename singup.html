@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>แบบฟอร์มนามสกุล</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(45deg, #0d0d0d, #00d4ff);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      max-width: 450px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      margin: 20px 0;
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 20px #007bff, 0 0 30px #007bff;
+      margin-bottom: 20px;
+    }
+
+    label, input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid transparent;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #00d4ff;
+      outline: none;
+    }
+
+    button {
+      background: linear-gradient(45deg, #0d0d0d, #00d4ff);
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #00b0ff, #007bff);
+      transform: scale(1.05);
+    }
+
+    .status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .status.success {
+      color: #00ff7f;
+    }
+
+    .status.error {
+      color: #ff6b6b;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .py-2 {
+      background: linear-gradient(45deg, #0d0d0d 10%, #00d4ff 20%, #00ffcc 30%, #00ff7f 40%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+      letter-spacing: 2px;
+      font-size: 14px;
+    }
+
+    @keyframes shine {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .styled-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 12px 20px;
+  background: rgba(0, 0, 30, 0.4);
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  max-width: 300px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.styled-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #00d4ff;
+  border-radius: 6px;
+  position: relative;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 5px rgba(0, 212, 255, 0.4);
+}
+
+.styled-checkbox input:checked + .checkmark {
+  background-color: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff;
+}
+
+.styled-checkbox input:checked + .checkmark::after {
+  content: '✔';
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.label-text {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>แบบฟอร์มนามสกุล</h2>
+
+    <label for="facebook">ลิงก์เฟสบุ๊ค:</label>
+    <input type="text" id="facebook" placeholder="กรอกลิงก์เฟสบุ๊ค">
+
+    <label for="discord">ชื่อ Discord:</label>
+    <input type="text" id="discord" placeholder="ชื่อดิส">
+
+    <label for="age">อายุ:</label>
+    <input type="number" id="age" placeholder="กรอกอายุ">
+
+    <label for="reason">เหตุผลที่อยากเข้า:</label>
+    <textarea id="reason" placeholder="เหตุผลที่อยากเข้า"></textarea>
+
+    <label class="styled-checkbox">
+      <input type="checkbox" id="lastname">
+      <span class="checkmark"></span>
+      <span class="label-text">บังคับเปลี่ยนนามสกุล</span>
+    </label>
+
+    <button id="submitBtn" onclick="submitForm()">ส่งข้อมูล</button>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    async function submitForm() {
+      const submitButton = document.getElementById("submitBtn");
+      submitButton.disabled = true;
+      submitButton.textContent = "กำลังส่ง...";
+
+      const facebook = document.getElementById("facebook").value;
+      const discord = document.getElementById("discord").value;
+      const age = document.getElementById("age").value;
+      const reason = document.getElementById("reason").value;
+      const lastname = document.getElementById("lastname").checked ? "ใช่" : "ไม่ใช่";
+
+      if (!facebook.trim() || !discord.trim() || !age.trim() || !reason.trim()) {
+        const status = document.getElementById("status");
+        status.textContent = "กรุณากรอกข้อมูลให้ครบ";
+        status.className = "status error";
+        submitButton.disabled = false;
+        submitButton.textContent = "ส่งข้อมูล";
+        return;
+      }
+
+      const webhookUrl = "https://discord.com/api/webhooks/1370074419334090893/z2twxnj7LwhuppIemnukXz-56lMgQD-eejHDDAswirK37ZVjZv_LljmsdzzNe1yx6vsk";
+
+      const payload = {
+        content: `**มีคนกรอกแบบฟอร์มเข้ามาแล้ว!**\n\n**เฟสบุ๊ค:** ${facebook}\n**Discord:** ${discord}\n**อายุ:** ${age}\n**เหตุผลที่อยากเข้า:** ${reason}\n**บังคับเปลี่ยนนามสกุล:** ${lastname}`
+      };
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const status = document.getElementById("status");
+
+        if (res.ok) {
+          status.textContent = "ข้อมูลส่งเรียบร้อยแล้ว!";
+          status.className = "status success";
+
+          // รีเซ็ตฟอร์ม
+          document.getElementById("facebook").value = "";
+          document.getElementById("discord").value = "";
+          document.getElementById("age").value = "";
+          document.getElementById("reason").value = "";
+          document.getElementById("lastname").checked = false;
+
+          // ปิดการใช้งานปุ่มหลังส่งแล้ว
+          submitButton.textContent = "ส่งแล้ว ✔";
+          submitButton.disabled = true;
+        } else {
+          status.textContent = "ส่งไม่สำเร็จ กรุณาลองใหม่อีกครั้ง";
+          status.className = "status error";
+          submitButton.disabled = false;
+          submitButton.textContent = "ส่งข้อมูล";
+        }
+      } catch (err) {
+        const status = document.getElementById("status");
+        status.textContent = "เกิดข้อผิดพลาด: " + err.message;
+        status.className = "status error";
+        submitButton.disabled = false;
+        submitButton.textContent = "ส่งข้อมูล";
+      }
+    }
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.keyCode == 123) e.preventDefault(); // Block F12
+    });
+  </script>
+</body>
+</html>

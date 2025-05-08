@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="https://img2.pic.in.th/pic/1111e7ca349ff75a1f5.png" type="image/x-icon">
+  <title>REPORT MEMBER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(45deg, #0d1117, #001f3f);
+      color: #e0f7ff;
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(0, 102, 204, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 153, 255, 0.3);
+      max-width: 450px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+    }
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #66ccff;
+      text-shadow: 0 0 20px #00ccff, 0 0 30px #0099ff;
+      margin-bottom: 20px;
+    }
+    label, input[type="text"], textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    input[type="text"] {
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid transparent;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e0f7ff;
+      transition: 0.3s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #33ccff;
+      outline: none;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid transparent;
+      background: rgba(0, 102, 204, 0.1);
+      color: #e0f7ff;
+      transition: 0.3s ease;
+    }
+    textarea:focus {
+      border-color: #33ccff;
+      outline: none;
+    }
+    button {
+      background: linear-gradient(45deg, #0066cc, #00ccff);
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(45deg, #00ccff, #66ffff);
+      transform: scale(1.05);
+    }
+    .status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .status.success { color: #00ffcc; }
+    .status.error { color: #ff6b6b; }
+    footer {
+      text-align: center;
+      padding: 15px;
+    }
+    .py-2 {
+      background: linear-gradient(45deg, #00ccff, #0099ff, #0033cc);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+      letter-spacing: 2px;
+    }
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+    @media (max-width: 768px) {
+      .card {
+        padding: 20px;
+        max-width: 100%;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    .search-result {
+      background-color: rgba(0, 153, 255, 0.2);
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      transition: background-color 0.2s;
+    }
+    .search-result:hover {
+      background-color: rgba(0, 153, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="main">
+      <div class="card">
+        <h2>REPORT MEMBER</h2>
+
+        <label for="search">ค้นหาชื่อสมาชิก:</label>
+        <input type="text" id="search" placeholder="ค้นหาชื่อสมาชิก..." onkeyup="searchMember()" />
+
+        <div id="searchResults"></div>
+
+        <label for="reporterName">ชื่อผู้แจ้ง:</label>
+        <input type="text" id="reporterName" placeholder="กรุณาพิมพ์ชื่อของคุณ..." />
+
+        <label for="message">ข้อความ:</label>
+        <textarea id="message" placeholder="พิมพ์ข้อความที่ต้องการ..."></textarea>
+
+        <button onclick="sendToDiscord()">ส่งข้อความ</button>
+        <div class="status" id="status"></div>
+      </div>
+    </div>
+    <footer>
+      <div class="py-2">
+        <h6>Copyright © Custom code By Jox © 2024 All Rights</h6>
+      </div>
+    </footer>
+  </div>
+
+  <script src="membersrp.js"></script>
+  <script>
+    let selectedMember = null;
+
+    function searchMember() {
+      const searchQuery = document.getElementById("search").value.toLowerCase();
+      const searchResultsEl = document.getElementById("searchResults");
+      searchResultsEl.innerHTML = '';
+
+      members.forEach(member => {
+        if (member.name.toLowerCase().includes(searchQuery)) {
+          const resultDiv = document.createElement("div");
+          resultDiv.classList.add("search-result");
+          resultDiv.textContent = member.name;
+          resultDiv.onclick = () => {
+            selectedMember = member.name;
+            document.getElementById("search").value = member.name;
+            searchResultsEl.innerHTML = '';
+          };
+          searchResultsEl.appendChild(resultDiv);
+        }
+      });
+    }
+
+    async function sendToDiscord() {
+      const reporterName = document.getElementById("reporterName").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!selectedMember) {
+        showStatus("กรุณาเลือกชื่อสมาชิกที่ถูกแจ้ง", "error");
+        return;
+      }
+
+      if (!reporterName || !message) {
+        showStatus("กรุณากรอกชื่อผู้แจ้งและข้อความก่อนส่ง", "error");
+        return;
+      }
+
+      const webhookUrl = "https://discord.com/api/webhooks/1362774557378740304/8nv35RvLQAS4uifqfI19qrZ98Ca-BEScVeGql8O_KZSp983yrmcLhKJMLcbHmrWsSYpi";
+
+      const payload = {
+        content: `ชื่อผู้แจ้ง: ${reporterName}\nชื่อสมาชิกที่ถูกแจ้ง: ${selectedMember}\nสาเหตุที่โดนแจ้ง: ${message}`
+      };
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          showStatus("ส่งข้อความเรียบร้อยแล้ว!", "success");
+          document.getElementById("message").value = "";
+          document.getElementById("reporterName").value = "";
+          selectedMember = null;
+        } else {
+          showStatus("ส่งไม่สำเร็จ ลองใหม่อีกครั้ง", "error");
+        }
+      } catch (err) {
+        showStatus("เกิดข้อผิดพลาด: " + err.message, "error");
+      }
+    }
+
+    function showStatus(msg, type) {
+      const statusEl = document.getElementById("status");
+      statusEl.textContent = msg;
+      statusEl.className = "status " + type;
+    }
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.keyCode == 123) e.preventDefault(); // Block F12
+    });
+  </script>
+</body>
+</html>
