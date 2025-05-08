@@ -1,6 +1,8 @@
 // member.js
 const members = [
-  { name: "Percy Gxw", fbId: "perq.diamondonsnow#" }
+  { name: "Jox Jutistory", fbId: "lakksjslal.ksksiksks#" },
+  { name: "Percy Gxw", fbId: "perq.diamondonsnow#" },
+  { name: "Wayla Gxw", fbId: "wayla.godmyhxnd#" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
