@@ -4,6 +4,7 @@ const members = [
   { name: "Percy Gxw", fbId: "perq.diamondonsnow#" },
   { name: "Wayla Gxw", fbId: "wayla.godmyhxnd#" },
   { name: "Kinz Gxw", fbId: "100080485166340#" },
+  { name: "Kxii Vincere", fbId: "100085538075706#" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
