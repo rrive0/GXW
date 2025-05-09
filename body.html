@@ -166,14 +166,14 @@
       }
     }
 
-    /* Responsive design */
+    /* เพิ่ม Media Queries สำหรับมือถือ */
     @media (max-width: 768px) {
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* ลดขนาดฟอนต์ */
       }
 
       nav button {
-        padding: 8px 18px;
+        padding: 8px 18px; /* ลดขนาดปุ่ม */
         font-size: 0.9rem;
       }
 
@@ -182,37 +182,38 @@
       }
 
       .volume-control input[type="range"] {
-        width: 100px;
+        width: 100px; /* ลดขนาดของ slider */
       }
 
       footer h6 {
-        font-size: 0.8rem;
+        font-size: 0.8rem; /* ลดขนาดฟอนต์ของฟุตเตอร์ */
       }
     }
 
+    /* สำหรับมือถือขนาดเล็ก */
     @media (max-width: 480px) {
       header {
-        padding: 15px;
+        padding: 15px; /* ปรับ padding ของ header */
       }
 
       .logo {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* ลดขนาดฟอนต์ของโลโก้ */
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 2rem; /* ลดขนาดฟอนต์ */
       }
 
       .music-controls button {
-        padding: 8px 18px;
+        padding: 8px 18px; /* ลดขนาดปุ่ม */
       }
 
       .volume-control input[type="range"] {
-        width: 80px;
+        width: 80px; /* ลดขนาด slider */
       }
 
       footer h6 {
-        font-size: 0.7rem;
+        font-size: 0.7rem; /* ลดขนาดฟอนต์ฟุตเตอร์ */
       }
     }
   </style>
@@ -283,25 +284,12 @@
         "shape": { "type": "circle" },
         "opacity": { "value": 0.5 },
         "size": { "value": 3 },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#00b7ff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 3
-        }
+        "line_linked": { "enable": true, "color": "#00b7ff", "opacity": 0.5 }
       },
       "interactivity": {
-        "events": {
-          "onhover": { "enable": true, "mode": "grab" }
-        }
+        "events": { "onhover": { "enable": true, "mode": "repulse" } }
       }
     });
   </script>
-
 </body>
 </html>
