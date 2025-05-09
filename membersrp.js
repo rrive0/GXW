@@ -9,7 +9,8 @@ const members = [
   { name: "Jing Gxw", fbId: "jing.gxw#" },
   { name: "Josefine Gxw", fbId: "100077494847829#" },
   { name: "Rxflex Gxw", fbId: "61566318151023#" },
-  { name: "Mindjia Lamlukka", fbId: "61550306857972#" }
+  { name: "Mindjia Lamlukka", fbId: "61550306857972#" },
+  { name: "Steven Gxw", fbId: "100065837666522#" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
